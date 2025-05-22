@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.google.services)
     id("kotlin-parcelize")
     id("kotlinx-serialization")
 }
@@ -36,6 +37,9 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(platform(libs.ktor.bom))
     implementation(platform(libs.koin.bom))
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.play.services.auth)
+    implementation(libs.bundles.firebase)
     implementation(libs.bundles.koin)
     implementation(libs.bundles.ktor)
     implementation(libs.bundles.compose)

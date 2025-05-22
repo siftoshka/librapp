@@ -14,7 +14,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
 import az.siftoshka.librapp.navigation.NavGraph
 import az.siftoshka.presentation.navigation.onboarding.OnboardingSubGraph
-import az.siftoshka.presentation.uikit.PlayLabTheme
+import az.siftoshka.presentation.uikit.LibrappTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            PlayLabTheme {
+            LibrappTheme {
                 val navController = rememberNavController()
                 Scaffold(
                     contentWindowInsets = WindowInsets(0.dp),

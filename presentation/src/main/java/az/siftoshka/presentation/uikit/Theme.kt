@@ -87,7 +87,7 @@ private val darkScheme = darkColorScheme(
 )
 
 @Composable
-fun PlayLabTheme(
+fun LibrappTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit

@@ -6,6 +6,10 @@ import az.siftoshka.domain.base.BaseUseCase
 import az.siftoshka.domain.base.FlowUseCase
 import az.siftoshka.domain.entity.RemoteResponse
 import az.siftoshka.domain.exceptions.GlobalErrorResponse
+import az.siftoshka.presentation.R
+import az.siftoshka.presentation.uikit.utils.UiText
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,6 +21,8 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
 
 abstract class BaseViewModel<State : UIState, Effect : UIEffect, Event : UIEvent> : ViewModel() {
 
@@ -33,6 +39,16 @@ abstract class BaseViewModel<State : UIState, Effect : UIEffect, Event : UIEvent
     val event: SharedFlow<Event> = _event
 
     fun currentViewState(): State = state.value
+
+    fun launch(
+        context: CoroutineContext = EmptyCoroutineContext,
+        start: CoroutineStart = CoroutineStart.DEFAULT,
+        block: suspend CoroutineScope.() -> Unit
+    ) {
+        viewModelScope.launch(context, start) {
+            block()
+        }
+    }
 
     init {
         subscribeEvents()
@@ -80,7 +96,7 @@ abstract class BaseViewModel<State : UIState, Effect : UIEffect, Event : UIEvent
         }
     }
 
-    fun <T, R> FlowUseCase<T, R>.invoke(
+    suspend fun <T, R> FlowUseCase<T, R>.invoke(
         params: T,
         handleLoading: ((Boolean) -> Unit)? = null,
         onStart: (() -> Unit)? = null,
@@ -107,6 +123,18 @@ abstract class BaseViewModel<State : UIState, Effect : UIEffect, Event : UIEvent
             }
             .onCompletion { error -> onFinish?.invoke() }
             .launchIn(viewModelScope)
+    }
+
+    internal fun onFailure(
+        message: String? = null,
+        resId: Int? = null,
+        onResult: (message: UiText) -> Unit
+    ) {
+        if (message != null) {
+            onResult(UiText.DynamicString(message))
+        } else {
+            onResult(UiText.StringResource(resId ?: R.string.error_something_went_wrong))
+        }
     }
 }
 
