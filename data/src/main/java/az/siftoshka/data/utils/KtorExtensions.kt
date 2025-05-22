@@ -1,5 +1,6 @@
 package az.siftoshka.data.utils
 
+import az.siftoshka.data.BuildConfig
 import az.siftoshka.domain.entity.RemoteResponse
 import az.siftoshka.domain.exceptions.ErrorResponse
 import az.siftoshka.domain.exceptions.GlobalErrorResponse
@@ -26,7 +27,8 @@ inline fun <reified Response, reified Body> HttpClient.safeRequest(
     body: Body,
 ): Flow<RemoteResponse<Response>> = flow {
     try {
-        val response = request(requestType, path) { headers(body) }
+        val basePath = BuildConfig.BASE_URL
+        val response = request(requestType, basePath + path) { headers(body) }
 
         when (response.status.value) {
             in 200..299 -> {

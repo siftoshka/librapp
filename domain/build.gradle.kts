@@ -23,4 +23,6 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.annotation)
     implementation(libs.gson)
+    implementation(platform(libs.koin.bom))
+    implementation(libs.koin.core)
 }

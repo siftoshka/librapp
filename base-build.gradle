@@ -14,9 +14,11 @@ android {
     productFlavors {
         prod {
             dimension = "env"
+            buildConfigField("String", "BASE_URL", "\"https://app.siftoshka.librapp..com/\"")
         }
         dev {
             dimension = "env"
+            buildConfigField("String", "BASE_URL", "\"https://dev.siftoshka.librapp.com/\"")
         }
     }
 

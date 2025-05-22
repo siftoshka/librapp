@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">librapp</string>
+    <string name="gso_key" translatable="false">124935911978-p6rosaibpp07gvk3bd90gufrbr5iehp1.apps.googleusercontent.com</string>
+
+    <string name="text_onboarding_feature_1">Organise favourite apps</string>
+    <string name="text_onboarding_feature_2">Share it with others</string>
+    <string name="text_onboarding_feature_3">Enhance your experience</string>
+    <string name="sign_in_google">Sign in with Google</string>
+
+    <string name="error_something_went_wrong">Something went wrong :(</string>
 </resources>

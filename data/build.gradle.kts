@@ -27,8 +27,11 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     api(libs.gson)
     api(libs.kotlinx.serialization.json)
+    implementation(libs.androidx.datastore)
     implementation(libs.runtime)
     implementation(platform(libs.androidx.compose.bom))
     implementation(platform(libs.ktor.bom))
     implementation(libs.bundles.ktor)
+    implementation(platform(libs.koin.bom))
+    implementation(libs.bundles.koin)
 }
