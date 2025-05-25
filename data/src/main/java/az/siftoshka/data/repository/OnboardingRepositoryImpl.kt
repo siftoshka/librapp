@@ -1,5 +1,6 @@
 package az.siftoshka.data.repository
 
+import az.siftoshka.data.utils.HeaderType
 import az.siftoshka.data.utils.RequestType
 import az.siftoshka.data.utils.safeRequest
 import az.siftoshka.domain.entity.LoginRequestModel
@@ -16,6 +17,7 @@ class OnboardingRepositoryImpl(
     override suspend fun login(requestModel: LoginRequestModel): Flow<RemoteResponse<Unit>> {
         return httpClient.safeRequest(
             requestType = RequestType.POST,
+            headerType = HeaderType.BASIC,
             path = NetworkPaths.Auth.Login,
             body = requestModel
         )

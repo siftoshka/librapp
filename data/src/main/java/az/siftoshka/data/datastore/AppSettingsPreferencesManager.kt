@@ -35,4 +35,10 @@ class AppSettingsPreferencesManager(context: Context) {
             it.copy(isLoggedIn = isLoggedIn)
         }
     }
+
+    suspend fun setAuthToken(token: String) {
+        dataStore.updateData {
+            it.copy(token = token)
+        }
+    }
 }

@@ -11,7 +11,8 @@ import java.util.Base64
 
 @Serializable
 data class AppSettingsPreferencesData(
-    val isLoggedIn: Boolean = false
+    val isLoggedIn: Boolean = false,
+    val token: String = String()
 )
 
 object AppSettingsPreferencesSerializer: Serializer<AppSettingsPreferencesData> {
