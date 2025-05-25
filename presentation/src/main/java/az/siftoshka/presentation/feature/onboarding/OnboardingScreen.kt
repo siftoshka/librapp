@@ -11,13 +11,16 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import az.siftoshka.presentation.feature.onboarding.components.IntroImage
 import az.siftoshka.presentation.feature.onboarding.components.IntroTexts
+import az.siftoshka.presentation.uikit.LocalSnackbar
+import az.siftoshka.presentation.uikit.base.BaseLoading
 import az.siftoshka.presentation.uikit.button.GoogleButton
 import az.siftoshka.presentation.uikit.snackbar.BaseSnackbar
-import az.siftoshka.presentation.uikit.snackbar.rememberBaseSnackbarState
 import az.siftoshka.presentation.uikit.spacing
 import az.siftoshka.presentation.uikit.utils.onGoogleLogout
 import org.koin.androidx.compose.koinViewModel
@@ -27,7 +30,8 @@ fun OnboardingScreen(
     onNavHome: () -> Unit,
     viewModel: OnboardingViewModel = koinViewModel()
 ) {
-    val snackbar = rememberBaseSnackbarState()
+    val state by viewModel.state.collectAsState()
+    val snackbar = LocalSnackbar.current
     val context = LocalContext.current
 
     LaunchedEffect(viewModel.effect) {
@@ -39,13 +43,12 @@ fun OnboardingScreen(
                 }
 
                 is OnboardingContract.Effect.OnFailure -> {
+                    context.onGoogleLogout()
                     snackbar.showErrorSnackbar(effect.message.asString(context))
                 }
             }
         }
     }
-
-    BaseSnackbar(state = snackbar)
 
     Surface(
         color = MaterialTheme.colorScheme.surface,
@@ -62,5 +65,8 @@ fun OnboardingScreen(
                 viewModel.postEvent { OnboardingContract.Event.OnLogin(it) }
             }
         }
+
+        BaseSnackbar(state = snackbar)
+        BaseLoading(isLoading = state.isLoading)
     }
 }

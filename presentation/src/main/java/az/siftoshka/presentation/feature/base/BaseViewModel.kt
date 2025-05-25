@@ -121,7 +121,10 @@ abstract class BaseViewModel<State : UIState, Effect : UIEffect, Event : UIEvent
                     }
                 }
             }
-            .onCompletion { error -> onFinish?.invoke() }
+            .onCompletion { error ->
+                handleLoading?.invoke(false)
+                onFinish?.invoke()
+            }
             .launchIn(viewModelScope)
     }
 
