@@ -5,6 +5,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.navigation
 import az.siftoshka.presentation.navigation.SubGraph
+import az.siftoshka.presentation.navigation.createlist.CreateListRoute
+import az.siftoshka.presentation.navigation.createlist.CreateListSubGraph
+import az.siftoshka.presentation.navigation.createlist.createListNavigation
 import az.siftoshka.presentation.navigation.home.HomeRoute
 import az.siftoshka.presentation.navigation.home.HomeSubGraph
 import az.siftoshka.presentation.navigation.home.homeNavigation
@@ -29,6 +32,11 @@ fun NavGraph(
         }
         navigation<HomeSubGraph.Main>(startDestination = HomeRoute.Home) {
             homeNavigation(
+                onBack = navController::navigateUp
+            )
+        }
+        navigation<CreateListSubGraph.Main>(startDestination = CreateListRoute.CreateList) {
+            createListNavigation(
                 onBack = navController::navigateUp
             )
         }
