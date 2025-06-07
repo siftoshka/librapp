@@ -2,7 +2,7 @@ package az.siftoshka.data.utils
 
 import az.siftoshka.data.BuildConfig
 import az.siftoshka.data.datastore.AppSettingsPreferencesManager
-import az.siftoshka.domain.entity.RemoteResponse
+import az.siftoshka.domain.entity.base.RemoteResponse
 import az.siftoshka.domain.exceptions.ErrorResponse
 import az.siftoshka.domain.exceptions.GlobalErrorResponse
 import io.ktor.client.HttpClient
@@ -18,12 +18,12 @@ import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flow
 import org.koin.core.context.GlobalContext
 
-inline fun <reified Response, reified Body> HttpClient.safeRequest(
+inline fun <reified Response> HttpClient.safeRequest(
     requestType: RequestType,
     headerType: HeaderType = HeaderType.AUTH,
     basePath: String = BuildConfig.BASE_URL,
     path: String,
-    body: Body? = null,
+    body: Any? = null,
 ): Flow<RemoteResponse<Response>> = flow {
     try {
         val response = request(

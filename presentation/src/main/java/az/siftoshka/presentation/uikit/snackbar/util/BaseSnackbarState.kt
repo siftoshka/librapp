@@ -16,6 +16,7 @@ class BaseSnackbarState {
         private set
 
     fun showSnackbar(message: String) {
+        _type.value = BaseSnackbarColor.TextWhite
         _message.value = message
         updateState = !updateState
     }

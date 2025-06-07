@@ -2,7 +2,6 @@ plugins {
     id("java-library")
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.jetbrainsKotlinJvm)
-    alias(libs.plugins.ksp)
     id("kotlinx-serialization")
 }
 

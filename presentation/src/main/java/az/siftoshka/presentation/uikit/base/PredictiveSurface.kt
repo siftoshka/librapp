@@ -26,8 +26,8 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun PredictiveSurface(
-    onBack: () -> Unit,
-    color: Color = MaterialTheme.colorScheme.tertiary,
+    onBack: (() -> Unit)? = null,
+    color: Color = MaterialTheme.colorScheme.surface,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit
 ) {
@@ -68,7 +68,7 @@ fun PredictiveSurface(
                         }
                     }
                 } else {
-                    onBack.invoke()
+                    onBack?.invoke()
                 }
             }
 
@@ -79,7 +79,9 @@ fun PredictiveSurface(
     }
 
     DisposableEffect(backPressedDispatcher) {
-        backPressedDispatcher?.addCallback(onBackCallback)
+        onBack?.let {
+            backPressedDispatcher?.addCallback(onBackCallback)
+        }
 
         onDispose { onBackCallback.remove() }
     }
