@@ -7,5 +7,8 @@
     <string name="text_onboarding_feature_3">Enhance your experience</string>
     <string name="sign_in_google">Sign in with Google</string>
 
+    <string name="text_common_continue">Continue</string>
+
     <string name="error_something_went_wrong">Something went wrong :(</string>
+    <string name="error_not_implemented">Not implemented yet :)</string>
 </resources>

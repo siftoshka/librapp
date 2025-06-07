@@ -4,7 +4,7 @@ import az.siftoshka.data.utils.HeaderType
 import az.siftoshka.data.utils.RequestType
 import az.siftoshka.data.utils.safeRequest
 import az.siftoshka.domain.entity.LoginRequestModel
-import az.siftoshka.domain.entity.RemoteResponse
+import az.siftoshka.domain.entity.base.RemoteResponse
 import az.siftoshka.domain.repository.OnboardingRepository
 import az.siftoshka.domain.utils.NetworkPaths
 import io.ktor.client.HttpClient

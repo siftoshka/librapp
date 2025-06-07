@@ -4,6 +4,7 @@ import android.app.Application
 import az.siftoshka.data.di.dataModule
 import az.siftoshka.data.di.networkModule
 import az.siftoshka.domain.di.useCaseModule
+import az.siftoshka.librapp.di.activityModule
 import az.siftoshka.presentation.di.createListPresentationModule
 import az.siftoshka.presentation.di.homePresentationModule
 import az.siftoshka.presentation.di.onboardingPresentationModule
@@ -21,6 +22,7 @@ class App: Application(), KoinStartup {
         androidContext(this@App)
 
         modules(
+            activityModule,
             dataModule,
             networkModule,
             useCaseModule,

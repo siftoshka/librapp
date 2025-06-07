@@ -8,8 +8,6 @@ fun NavGraphBuilder.homeNavigation(
     onBack: () -> Unit,
 ) {
     animatedComposable<HomeRoute.Home> {
-        HomeScreen(
-            onBack = onBack
-        )
+        HomeScreen()
     }
 }

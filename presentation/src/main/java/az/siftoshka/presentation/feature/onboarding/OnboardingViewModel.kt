@@ -1,5 +1,6 @@
 package az.siftoshka.presentation.feature.onboarding
 
+import az.siftoshka.data.datastore.AppSettingsPreferencesManager
 import az.siftoshka.domain.exceptions.GlobalErrorResponse
 import az.siftoshka.domain.usecase.LoginUseCase
 import az.siftoshka.presentation.feature.base.BaseViewModel
@@ -9,6 +10,7 @@ import az.siftoshka.presentation.feature.onboarding.OnboardingContract.State
 
 class OnboardingViewModel(
     private val loginUseCase: LoginUseCase,
+    private val appManager: AppSettingsPreferencesManager
 ) : BaseViewModel<State, Effect, Event>() {
 
     override fun setInitialState() = State()
@@ -41,7 +43,8 @@ class OnboardingViewModel(
         )
     }
 
-    private fun storeToken() {
+    private fun storeToken() = launch {
+        appManager.changeLoginStatus(true)
         postEffect { Effect.OnNavHome }
     }
 }

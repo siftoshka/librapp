@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import az.siftoshka.domain.base.BaseUseCase
 import az.siftoshka.domain.base.FlowUseCase
-import az.siftoshka.domain.entity.RemoteResponse
+import az.siftoshka.domain.entity.base.RemoteResponse
 import az.siftoshka.domain.exceptions.GlobalErrorResponse
 import az.siftoshka.presentation.R
 import az.siftoshka.presentation.uikit.utils.UiText
